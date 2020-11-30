@@ -105,15 +105,36 @@ const VoiceRSS = {
   },
 };
 
-function test() {
-  VoiceRSS.speech({
-    key: "9eda57148d5a4028a2cd18254c7749c8",
-    src: "Hello, World!",
-    hl: "en-us",
-    r: 0,
-    c: "mp3",
-    f: "44khz_16bit_stereo",
-    ssml: false,
-  });
+// function test() {
+//   VoiceRSS.speech({
+//     key: "9eda57148d5a4028a2cd18254c7749c8",
+//     src: "Hello, World!",
+//     hl: "en-us",
+//     r: 0,
+//     c: "mp3",
+//     f: "44khz_16bit_stereo",
+//     ssml: false,
+//   });
+// }
+// test();
+
+// Get Jokes From Joke API
+async function getJokes() {
+  let joke = "";
+  const apiUrl =
+    "https://sv443.net/jokeapi/v2/joke/Programming,Miscellaneous,Pun";
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    if (data.setup) {
+      joke = `${data.setup} ... ${data.delivery}`;
+    } else {
+      joke = data.joke;
+    }
+    console.log(joke);
+  } catch (error) {
+    console.log("Oops", error);
+  }
 }
-test();
+
+getJokes();
